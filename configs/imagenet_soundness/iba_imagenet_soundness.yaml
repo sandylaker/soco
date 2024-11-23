@@ -1,0 +1,10 @@
+_base_:
+    [
+        "../_base_/datasets/small_imagenet.yaml",
+        "../_base_/metrics/vision_soundness.yaml",
+        "../_base_/models/vgg16_in1k.yaml"
+    ]
+
+data:
+    test:
+        smap_root: "data/small_imagenet/smaps/vgg_imagenet/iba/"

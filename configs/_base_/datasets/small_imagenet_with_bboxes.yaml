@@ -1,0 +1,6 @@
+_base_: ["./small_imagenet.yaml"]
+
+data:
+    test:
+        smap_root: null
+        bbox_annot_root: data/small_imagenet/bbox_annotations/

@@ -1,0 +1,9 @@
+mask_ratios:
+    start: 0.10
+    end: 1.0
+    step: 0.10
+
+imputation:
+    type: ROAD
+    smap_mask_mode: lerf
+    by_area: true

@@ -1,0 +1,16 @@
+# mask_ratios are a range [start, end) with step size `step`
+mask_ratios:
+    start: 0.98
+    end: 0.02
+    step: -0.01
+
+imputation:
+    type: ROAD
+    smap_mask_mode: lerf
+    by_area: true
+
+soundness:
+    cls_metric:
+        type: Accuracy
+    cls_threshold: 0.01
+    cls_result_start: 0.04

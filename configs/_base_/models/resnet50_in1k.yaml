@@ -1,0 +1,3 @@
+classifier:
+    model_name: resnet50
+    pretrained: true
