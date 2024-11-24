@@ -1,29 +1,89 @@
 # A Dual-Perspective Approach to Evaluating Feature Attribution Methods (Accepted by TMLR 2024)
 
+This repository contains code and scripts accompanying the paper *"A Dual-Perspective Approach to Evaluating Feature Attribution Methods,"* accepted by **TMLR 2024**. The methods and tools provided allow for robust evaluation of feature attribution methods, focusing on completeness and soundness metrics.
+
+---
+
 ## Installation
-1. `pip install -e .` (Do not miss the dot `.`). Developers please run `pip install -e ".[dev]"`.
-2. (Optional, for developers only ) Install pre-commit hooks via `pip install pre-commit && pre-commit install`.
 
+To set up the environment, follow these steps:
 
-## Code structure
+1. Install the package:
+   ```bash
+   pip install -e .
+   ```
+   *(Do not miss the dot `.`)*
 
-### Scripts for running experiments
-The scripts are under `tools/` directory.
-* `run_vision_completeness.py` is the script for completeness evaluation.
-* `run_vision_soundness.py` is the script for soundness evaluation.
+2. For developers, install additional dependencies:
+   ```bash
+   pip install -e ".[dev]"
+   ```
 
-### Configuration files
-The configuration files are under `configs` directory.
+3. (Optional, for developers) Set up pre-commit hooks:
+   ```bash
+   pip install pre-commit && pre-commit install
+   ```
 
-### Library
-The library is under `soco/` directory.
-* `soco/classifiers/` contains the function for building `mmcls` classifiers.
-* `soco/imputations/` contains the imputation methods.
-* `soco/datasets/` contains the datasets and image transformation pipelines.
-* `soco/metrics/` contains the classes for evaluating soundness and completeness.
-* `soco/utils/` contains some utility functions.
+---
 
-### Citation
+## Data Preparation
+
+### Image Folder Structure
+
+Images should follow the `torchvision.datasets.ImageFolder` format.
+Additionally, it is recommended to prepare a JSON file mapping class names to class indices.
+This mapping ensures consistency between the class indices determined by the `ImageFolder` alphabetical sorting and
+those used by the classifier model.
+
+For example: The model's output logits might correspond to `["B", "A", "C"]`, while the `ImageFolder` format may
+organize classes as `["A", "B", "C"]`. For more details, refer to the `soco.datasets.ImageFolder` class.
+
+### Attribution Maps
+
+Attribution maps (referred to as `smap` in this repository) should mirror the structure of the image folder. Key guidelines:
+- Attribution map filenames should match the corresponding image filenames.
+- Use a consistent format for all attribution maps (e.g., with file extension `.png` or `.jpeg`).
+
+---
+
+## Running Experiments
+
+The main scripts for running experiments are located in the `tools/` directory.
+
+### Scripts
+- **Completeness Evaluation**: Use `tools/run_vision_completeness.py`.
+- **Soundness Evaluation**: Use `tools/run_vision_soundness.py`.
+
+### Configuration
+Before running the scripts, adapt the configuration files located in the `configs/` directory. Configuration can be adjusted in two ways:
+
+1. **Directly Modify Config Files**:
+   Update the configuration entries directly in the YAML files. Note that some configurations may inherit settings from other files. For details, see the [mmengine.Config documentation](https://mmengine.readthedocs.io/en/latest/advanced_tutorials/config.html).
+
+2. **Override via Command Line**:
+   Use the `-o` option to override specific configurations directly in the command line.
+
+### Performance Note
+The completeness and soundness evaluations involve a linear imputation step (based on the ROAD paper). When perturbing a large number of pixels, this step can be computationally expensive as it requires solving a sparse linear system on the CPU.
+
+### Example Usage
+Run a completeness evaluation with the following command:
+
+```bash
+python tools/run_vision_completeness.py \
+  configs/imagenet_completeness/gradcam_imagenet_completeness.yaml \
+  workdirs/gradcam/completeness/ \
+  -o data.test.img_root=PATH_TO_IMAGE_FOLDER \
+     data.test.smap_root=PATH_TO_SMAP_FOLDER \
+     data.test.smap_extension=png \
+     data.test.cls_to_ind_file=PATH_TO_JSON_FILE \
+     classifier.model_name=vgg16
+```
+
+---
+
+## Citation
+
 
 ```bibtex
 @article{li2024dual,

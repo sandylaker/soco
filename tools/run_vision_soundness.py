@@ -17,6 +17,7 @@ def parse_args():
     parser.add_argument('--gpu-id', type=int, default=0, help='GPU ID.')
     parser.add_argument(
         '--cfg-options',
+        '-o',
         nargs='+',
         action=mmengine.DictAction,
         help='override some settings in the used config, the key-value pair '
