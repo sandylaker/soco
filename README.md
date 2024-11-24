@@ -2,7 +2,7 @@
 
 This repository contains code and scripts accompanying the paper
 *"A Dual-Perspective Approach to Evaluating Feature Attribution Methods"*
-accepted by **TMLR 2024**.
+accepted by **[Transactions on Machine Learning Research (TMLR) 2024](https://openreview.net/forum?id=znlTP5RLur)**.
 
 ---
 
