@@ -1,6 +1,8 @@
 # A Dual-Perspective Approach to Evaluating Feature Attribution Methods (Accepted by TMLR 2024)
 
-This repository contains code and scripts accompanying the paper *"A Dual-Perspective Approach to Evaluating Feature Attribution Methods,"* accepted by **TMLR 2024**. The methods and tools provided allow for robust evaluation of feature attribution methods, focusing on completeness and soundness metrics.
+This repository contains code and scripts accompanying the paper
+*"A Dual-Perspective Approach to Evaluating Feature Attribution Methods"*
+accepted by **TMLR 2024**.
 
 ---
 
